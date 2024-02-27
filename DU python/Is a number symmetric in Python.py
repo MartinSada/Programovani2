@@ -1,29 +1,27 @@
-m = 0
-list = []
+n = 0
+n_str = ""
+result = ""
+
 
 while (True):
-    m = int(input())
-    if m == 0:
-        break
-    list.append(m)
-
-n = ""
-for i in list:
-    cifry = []
     b = True
-    while i>0:
-        cifry.append(i%10)
-        i = i//10
-    for j in range(0, len(cifry)):
-        if cifry[j] != cifry[len(cifry)-j-1]:
+    n = int(input())
+    if (n == 0):
+        break
+    else:
+        n_str = str(n)
+        if n_str[-1] == "0":
             b = False
-        if(cifry[0] == 0):
-            b = False
-    if (b):
-        for j in cifry:
-            n += str(j)
-        n += " "
-print(n)
+        else:
+            if n_str != n_str[::-1]:
+                b = False
+        if(b):
+            result += n_str + " "
+print(result)
+
+
+
+
 
 
 
