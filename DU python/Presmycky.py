@@ -1,14 +1,34 @@
+from collections import defaultdict
 
-hesla = []
-dotazy = []
+def indexSlova(zadani):
+    index = defaultdict(list)
+
+    for slovo in zadani:
+        soucetZnaku = defaultdict(int)
+
+        for znak in slovo:
+            soucetZnaku[znak] += 1
+        key = tuple(sorted(soucetZnaku.items()))
+        index[key].append(slovo)
+    return index
 
 n = int(input())
-for i in range(1,n):
-    hesla.append(str(input()))
-
+hesla = [input() for _ in range(n)]
 m = int(input())
-for i in range(1,m):
-    dotazy.append(str(input))
+dotazy = [input() for _ in range(m)]
+
+index = indexSlova(hesla)
+
+for dotaz in dotazy:
+    soucetZnaku = defaultdict(int)
+    for znak in dotaz:
+        soucetZnaku[znak] += 1
+
+    key = tuple(sorted(soucetZnaku.items()))
+    if key in index:
+        print(' '.join(sorted(index[key])))
+    else:
+        print()
 
 
 
