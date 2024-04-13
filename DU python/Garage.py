@@ -1,42 +1,44 @@
+from collections import deque
+
 def garageSum(n,m,coefs, weights, arrDep):
     garage = [None]*n
     totalCost = 0
-    parked = [None]*m
-    que = []
+    parked = [None]*(m+1)
+    que = deque()
 
     for i in range(2*m):
         action = arrDep[i]
         carIndex = abs(action)
-        carWeight = weights[carIndex-1]
+        carWeight = weights[carIndex]
 
         if action >0:
-            for j in range(n):
-                if garage[j]==None:
-                    garage[j]=carIndex
-                    totalCost += coefs[j]*carWeight
-                    parked[carIndex-1] = True
-                    break
-
-            if parked[carIndex-1] == False:
+            if que:
                 que.append(carIndex)
+            else:
+                for j in range(n):
+                    if garage[j]==None:
+                        garage[j]=carIndex
+                        totalCost += coefs[j]*carWeight
+                        parked[carIndex] = j
+                        break
+                if parked[carIndex] == None:
+                    que.append(carIndex)
 
         else:
-            if (parked[carIndex-1]):
-                for j in range(n):
-                    if garage[j]==carIndex:
-                        garage[j]=None
-                        parked[carIndex-1] = False
-                        if len(que)>0:
-                            garage[j] = que[0]
-                            totalCost += coefs[j] * (weights[que[0] - 1])
-                            parked[que[0] - 1] = True
-                            que.pop(0)
-                        break
+            j = parked[carIndex]
+            garage[j] = None
+            parked[carIndex] = None
+
+            if que:
+                carIndex = que.popleft()
+                garage[j] = carIndex
+                totalCost += coefs[j] * (weights[carIndex])
+                parked[carIndex] = j
 
     print(totalCost)
 
 
-n, m = input().strip().split(" ")
+n, m = [int(s) for s in input().split()]
 n = int(n)
 m = int(m)
 coefs = []
@@ -45,6 +47,7 @@ arrDep = []
 
 for i in range(n):
     coefs.append(int(input()))
+weights.append(None)
 for i in range(m):
     weights.append(int(input()))
 
