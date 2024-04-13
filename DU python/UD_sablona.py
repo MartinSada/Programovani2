@@ -31,39 +31,24 @@ def NactiLSS():
 
 #################################################
 
-def IntersectionDestruct(a,b):
+def UnionDestruct(a,b):
     """ destruktivni prunik dvou usporadanych seznamu
     * nevytvari zadne nove prvky, vysledny seznam bude poskladany z prvku puvodnich seznamu,
     * vysledek je MNOZINA, takze se hodnoty neopakuji """
-    if a == None or b == None:
-        return None
-    else:
-        head = tail = None
 
-        while a != None and b != None:
-            if a.x == b.x:
-                if head == None:
-                    head = tail = a
-                else:
-                    tail.dalsi = a
-                    tail = a
+    # sem doplnte kod funkce, dalsi casti zdrojoveho kodu NEMENTE
+    # ....................................................
+    # ....................................................
+    # ....................................................
+    # ....................................................
+    # ....................................................
+    # ....................................................
+    # ....................................................
+    # ....................................................
+    # ....................................................
 
-                while a.dalsi != None and a.x == a.dalsi.x:
-                    a = a.dalsi
-                while b.dalsi != None and b.x == b.dalsi.x:
-                    b = b.dalsi
-
-                a = a.dalsi
-                b = b.dalsi
-
-                tail.dalsi = None
-
-            elif a.x < b.x:
-                a = a.dalsi
-            else:
-                b = b.dalsi
-        return head
+    return None
 
 #################################################
 
-VytiskniLSS( IntersectionDestruct( NactiLSS(), NactiLSS() ) )
+VytiskniLSS( UnionDestruct( NactiLSS(), NactiLSS() ) )
